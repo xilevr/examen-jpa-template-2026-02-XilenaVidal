@@ -19,10 +19,10 @@ public class PullRequest {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(nullable = false)
+    @Column(name = "title", nullable = false)
     private String title;
 
-    @Column(nullable = false)
+    @Column(name = "status", nullable = false)
     private String status;
 
     @Column(name = "pr_number", nullable = false)
@@ -37,6 +37,7 @@ public class PullRequest {
     private List<Repository> repository;
 
     @OneToMany(fetch = FetchType.LAZY)
-    @JoinColumn(name = "reviewer_id")
+    @JoinColumn(name = "user_id", nullable = false)
+    private List<User> collaborators;
     private User teacher;
 }
