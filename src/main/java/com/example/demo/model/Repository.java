@@ -3,6 +3,7 @@ package com.example.demo.model;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.*;
+import org.hibernate.annotations.ManyToAny;
 
 import java.sql.Timestamp;
 import java.util.List;
@@ -34,14 +35,22 @@ public class Repository {
     @JoinColumn( name = "commits", nullable = false)
     private List<Commit> commits;
 
-   
 
     @JsonIgnore
     @ToString.Exclude
     @EqualsAndHashCode.Exclude
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "assignment_id", nullable = false)
+    private Assignment assignment;
     private List<Assignment> assignments;
+
+    @JsonIgnore
+    @ToString.Exclude
+    @EqualsAndHashCode.Exclude
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "user_id", nullable = false)
+    private User  user;
+    private List<User> users;
 
 
 

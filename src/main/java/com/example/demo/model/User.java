@@ -1,5 +1,6 @@
 package com.example.demo.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -26,21 +27,37 @@ public class User {
     @Column(name = "full_name", nullable = false)
     private String role;
 
-    @Column(nullable = false)
+    @Column(nullable = false
     private String fullName;
 
+
+    @JsonIgnore
+    @ToString.Exclude
+    @EqualsAndHashCode.Exclude
     @OneToMany(mappedBy = "teacher", cascade = CascadeType.ALL)
     private List<Classroom> ownedRepositories;
 
+    @JsonIgnore
+    @ToString.Exclude
+    @EqualsAndHashCode.Exclude
     @OneToMany(mappedBy = "owner", cascade = CascadeType.ALL)
     private List<PullRequest> taughtRepositories;
 
+    @JsonIgnore
+    @ToString.Exclude
+    @EqualsAndHashCode.Exclude
     @ManyToOne(mappedBy = "author", cascade = CascadeType.ALL)
     private List<PullRequest> authoredPullRequests;
 
+    @JsonIgnore
+    @ToString.Exclude
+    @EqualsAndHashCode.Exclude
     @OneToMany(mappedBy = "reviewer", cascade = CascadeType.ALL)
     private List<PullRequest> reviewedPullRequests;
 
+    @JsonIgnore
+    @ToString.Exclude
+    @EqualsAndHashCode.Exclude
     @ManyToOne(mappedBy = "commits", cascade = CascadeType.ALL)
     private List<Commit> commits;
 }
